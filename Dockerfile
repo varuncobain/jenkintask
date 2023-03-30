@@ -15,5 +15,6 @@ RUN apt-get update
 COPY . /var/www/html/
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/Options Indexes FollowSymLinks/Options FollowSymLinks/' /etc/apache2/apache2.conf
 RUN echo "<IfModule dir_module>\n    DirectoryIndex login.php\n</IfModule>" >> /etc/apache2/apache2.conf
+RUN rm -frv /var/www/html/index.html
 EXPOSE 80
 CMD /usr/sbin/apachectl -DFOREGROUND
