@@ -13,8 +13,6 @@ RUN apt-get -y install php7.4-mysql
 RUN apt-get -y install libapache2-mod-php7.4
 RUN apt-get update
 COPY . /var/www/html/
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/Options Indexes FollowSymLinks/Options FollowSymLinks/' /etc/apache2/apache2.conf
-RUN echo "<IfModule dir_module>\n    DirectoryIndex login.php\n</IfModule>" >> /etc/apache2/apache2.conf
-
+COPY dir.conf /etc/apache2/mods-enabled/dir.conf
 EXPOSE 80
 CMD /usr/sbin/apachectl -DFOREGROUND
